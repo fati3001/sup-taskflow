@@ -1,0 +1,129 @@
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.confirm-modal {
+  background: #f8fafc;
+  border: 1px solid #dbe2ea;
+  border-radius: 16px;
+  padding: 24px;
+  width: 100%;
+  max-width: 360px;
+  box-shadow: 0 20px 50px rgba(2, 6, 23, 0.3);
+}
+
+.confirm-message {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 20px;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.confirm-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.confirm-btn-danger {
+  flex: 1;
+  padding: 10px;
+  background: linear-gradient(135deg, #111111, #2c2c2c);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  &:hover { transform: translateY(-1px); }
+}
+
+.confirm-btn-cancel {
+  flex: 1;
+  padding: 10px;
+  background: #e2e8f0;
+  color: #334155;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  &:hover { background: #cbd5e1; }
+}
+.modal-assignees {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.modal-avatar-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.modal-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.assignee-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.assignee-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s;
+
+  &:hover { background: rgba(0, 0, 0, 0.06); }
+  &.selected { background: rgba(0, 0, 0, 0.08); }
+}
+
+.assignee-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.assignee-name {
+  font-size: 13px;
+  flex: 1;
+  color: #0f172a;
+}
+
+.assignee-check {
+  font-size: 12px;
+  color: #2ecc71;
+  font-weight: 700;
+}

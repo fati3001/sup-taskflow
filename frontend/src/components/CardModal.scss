@@ -1,0 +1,433 @@
+// ─── Overlay ─────────────────────────────────────────────────────────────────
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.62);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 1000;
+  padding: 40px 16px;
+  overflow-y: auto;
+}
+
+// ─── Modal Shell ─────────────────────────────────────────────────────────────
+.modal {
+  background: #f8fafc;
+  border: 1px solid #dbe2ea;
+  border-radius: 18px;
+  width: 100%;
+  max-width: 720px;
+  box-shadow: 0 30px 70px rgba(2, 6, 23, 0.35);
+  display: flex;
+  flex-direction: column;
+}
+
+// ─── Header ──────────────────────────────────────────────────────────────────
+.modal-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 20px 0;
+}
+
+.modal-title-wrapper { flex: 1; }
+
+.modal-title-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #f0f0f0;
+  cursor: pointer;
+
+  &:hover { background: #e8e8e8; }
+}
+
+.modal-title-text {
+  flex: 1;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.modal-title-edit-icon {
+  filter: brightness(0);
+  opacity: 0.4;
+  transition: opacity 0.2s ease;
+}
+
+.modal-title-display:hover .modal-title-edit-icon { opacity: 0.8; }
+
+.modal-title-input {
+  flex: 1;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a;
+  background: #f0f0f0;
+  padding: 8px 10px;
+  outline: none;
+
+  &:focus    { border-color: #111111; box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.12); }
+  &.editing  { width: 100%; border-color: #111111; box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.12); }
+}
+
+.modal-close {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: #e2e8f0;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  // Accessible touch target
+  min-width: 44px;
+  min-height: 44px;
+
+  &:hover { background: #cbd5e1; }
+}
+
+// ─── Body Layout ─────────────────────────────────────────────────────────────
+.modal-body {
+  display: flex;
+  gap: 16px;
+  padding: 16px 20px;
+}
+
+.modal-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.modal-sidebar {
+  width: 210px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+// ─── Sections ────────────────────────────────────────────────────────────────
+.modal-section,
+.sidebar-section {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+
+  h5 {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 700;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+}
+
+// ─── Labels ──────────────────────────────────────────────────────────────────
+.selected-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.label-chip {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.label-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.label-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 8px;
+  border-radius: 9px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  // Accessible touch target
+  min-height: 44px;
+
+  &:hover    { background: #f0f0f0; }
+  &.selected { background: #e9e9e9; border-color: #cccccc; }
+}
+
+.label-dot  { width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0; }
+
+.label-name {
+  flex: 1;
+  font-size: 13px;
+  color: #334155;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.label-check       { font-size: 12px; color: #111111; font-weight: 700; }
+
+.label-delete-btn {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  font-size: 0.72rem;
+  padding: 2px 5px;
+  border-radius: 6px;
+
+  &:hover { background: #111111; color: white; }
+}
+
+// ─── New Label Form ───────────────────────────────────────────────────────────
+.new-label-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  background: #f2f2f2;
+  border-radius: 10px;
+
+  input {
+    padding: 7px 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 13px;
+    outline: none;
+
+    &:focus { border-color: #111111; box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12); }
+  }
+}
+
+.color-swatch-wrapper {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #e2e8f0;
+  cursor: pointer;
+
+  &:hover { border-color: #111; }
+}
+
+.color-swatch-preview {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.color-swatch-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  padding: 0;
+  border: none;
+}
+
+.new-label-actions {
+  display: flex;
+  gap: 6px;
+
+  button {
+    flex: 1;
+    padding: 6px;
+    border: none;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    // Accessible touch target
+    min-height: 44px;
+
+    &:first-child { background: linear-gradient(135deg, #111111, #2c2c2c); color: #fff; }
+    &:last-child  { background: #cbd5e1; color: #334155; }
+  }
+}
+
+.btn-add-label {
+  width: 100%;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #334155;
+  background: #e2e8f0;
+  cursor: pointer;
+  min-height: 44px;
+
+  &:hover { background: #cbd5e1; }
+}
+
+// ─── Due Date ────────────────────────────────────────────────────────────────
+.due-date-display {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  font-size: 13px;
+  font-weight: 500;
+  color: #334155;
+  width: fit-content;
+
+  &.overdue { background: #1f1f1f; color: #fff; }
+}
+
+.date-input {
+  width: 100%;
+  padding: 7px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: inherit;
+  background: #fff;
+  box-sizing: border-box;
+
+  &:focus { outline: none; border-color: #111111; box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12); }
+}
+
+.btn-clear-date {
+  width: 100%;
+  padding: 5px 8px;
+  border: 1px solid #d1d1d1;
+  border-radius: 8px;
+  font-size: 12px;
+  color: #1f1f1f;
+  background: #fff;
+  cursor: pointer;
+  min-height: 44px;
+
+  &:hover { background: #111111; color: #fff; border-color: #111111; }
+}
+
+// ─── Description ─────────────────────────────────────────────────────────────
+.modal-description {
+  width: 100%;
+  min-height: 100px;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #0f172a;
+  background: #fff;
+  resize: vertical;
+  box-sizing: border-box;
+
+  &::placeholder { color: #97a0af; }
+  &:focus { outline: none; border-color: #111111; box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.12); }
+}
+
+// ─── Danger & Action Buttons ─────────────────────────────────────────────────
+.btn-danger {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #d1d1d1;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1f1f1f;
+  background: #fff;
+  cursor: pointer;
+  min-height: 44px;
+
+  &:hover { background: #111111; color: #fff; }
+}
+
+// ─── Footer ──────────────────────────────────────────────────────────────────
+.modal-footer {
+  display: flex;
+  gap: 10px;
+  padding: 16px 20px;
+  border-top: 1px solid #e2e8f0;
+  justify-content: flex-end;
+}
+
+.btn-save {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #111111, #2c2c2c);
+  cursor: pointer;
+  min-height: 44px;
+
+  &:hover:not(:disabled) { transform: translateY(-1px); }
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+}
+
+.btn-cancel {
+  padding: 10px 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+  background: #e2e8f0;
+  cursor: pointer;
+  min-height: 44px;
+
+  &:hover { background: #cbd5e1; }
+}
+
+// ─── Responsive ──────────────────────────────────────────────────────────────
+@media (max-width: 600px) {
+  .modal-overlay {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .modal {
+    border-radius: 16px 16px 0 0;
+    max-height: 95vh;
+    overflow-y: auto;
+  }
+
+  .modal-body {
+    flex-direction: column-reverse;
+  }
+
+  .modal-sidebar {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .sidebar-section {
+    flex: 1;
+    min-width: 140px;
+  }
+}

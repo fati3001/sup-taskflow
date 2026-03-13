@@ -1,0 +1,85 @@
+// ─── Toggle Wrapper ──────────────────────────────────────────────────────────
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 64px;
+  height: 32px;
+  cursor: pointer;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+}
+
+// ─── Slider Track ────────────────────────────────────────────────────────────
+.theme-slider {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: #1a1a1a;
+  border: 2px solid #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px;
+  transition: background 0.3s ease, border-color 0.3s ease;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 3px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease;
+  }
+}
+
+// ─── Thumb Position ──────────────────────────────────────────────────────────
+.theme-switch input:checked     + .theme-slider::after { transform: translateX(0); }
+.theme-switch input:not(:checked) + .theme-slider::after { transform: translateX(32px); }
+
+.theme-switch input:not(:checked) + .theme-slider {
+  background: #e2e2e2;
+  border-color: #ccc;
+}
+
+// ─── Icons ───────────────────────────────────────────────────────────────────
+.theme-icon {
+  font-size: 13px;
+  line-height: 1;
+  z-index: 1;
+  transition: opacity 0.2s ease;
+
+  &--moon { color: #ffffff; }
+  &--sun  { color: #888; }
+}
+
+.theme-switch input:not(:checked) + .theme-slider {
+  .theme-icon--moon { color: #bbb; }
+  .theme-icon--sun  { color: #333; }
+}
+
+// ─── Responsive ──────────────────────────────────────────────────────────────
+@media (max-width: 768px) {
+  .theme-switch {
+    width: 46px;
+    height: 24px;
+  }
+
+  .theme-slider::after {
+    width: 18px;
+    height: 18px;
+  }
+
+  .theme-switch input:not(:checked) + .theme-slider::after {
+    transform: translateX(22px);
+  }
+
+  .theme-icon { font-size: 10px; }
+}
